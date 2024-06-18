@@ -1,0 +1,50 @@
+version: "3.1"
+
+services:
+  view-phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.1
+    depends_on:
+      - mybd
+    ports:
+      - "30007:80"
+    environment:
+      PMA_HOST: mybd
+      MYSQL_ROOT_PASSWORD: lisungi
+    networks:
+      - netfront
+      - netbd
+      - netlogic
+
+  mybd:
+    image: mysql:8.3.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dgtt
+      MYSQL_DATABASE: dgtt
+    # volumes:
+      # - ./databasemysql:/var/lib/mysql
+      # - ./databasedb/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - netfront
+      - netbd
+      - netlogic
+
+  backlogic:
+    image: backend:latest
+    depends_on:
+      - mybd
+    ports:
+      - 30051:8000
+    networks:
+      - netlogic
+      - netfront
+      - netbd
+
+networks:
+  netbd:
+    driver: bridge
+  netfront:
+    driver: bridge
+  netlogic:
+    driver: bridge

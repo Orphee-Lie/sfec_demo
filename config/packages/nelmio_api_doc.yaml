@@ -1,0 +1,59 @@
+
+nelmio_api_doc:
+    documentation:
+        servers:
+          - url: https://127.0.0.1:8000
+        info:
+            title: Caisse DGTT 
+            description: API de la Caisse DGTT!
+            version: 1.0.0
+        paths:
+            /api/v1/connexion:
+                post:
+                    tags:
+                        - Token
+                    operationId: postCredentialsItem
+            
+                    summary: Permet d'obtenir le token JWT pour se connecter.
+                    requestBody:
+                        description: Création du token JWT
+                        content:
+                            application/json:
+                                schema:
+                                   $ref: '#/components/schemas/Credentials'
+                    responses:
+                        '200':
+                            description: Recupération du token JWT
+                            content:
+                                application/json:
+                                    schema:
+                                        $ref: '#/components/schemas/Token'
+        components:
+            schemas:
+                Token:
+                    type: object
+                    properties:
+                        token:
+                            type: string
+                            readOnly: true
+                Credentials:
+                    type: object
+                    properties:
+                        username:
+                            type: string
+                            default: 12
+                        password:
+                            type: string
+                            default: 12
+            securitySchemes:
+                BearerAuth:
+                    type: apiKey
+                    in: header
+                    name: Authorization
+        security:
+            - BearerAuth: []
+
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api/v1(?!/doc$) # Accepts routes under /api except /api/doc
+            - ^api/v1(?!/partenaire$) # Ajout du pattern spécifique pour la route de l'API de l'operabilité

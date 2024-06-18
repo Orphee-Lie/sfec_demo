@@ -1,0 +1,8 @@
+lexik_jwt_authentication:
+    private_key_path: '%kernel.project_dir%/config/jwt/private.pem'
+    public_key_path:  '%kernel.project_dir%/config/jwt/public.pem'
+    pass_phrase:      '54e4c7d776629bb646aa005fa443c6cd2861796d2da92200cafec7b2401c06e8'  # Si votre clé privée est protégée par une phrase secrète
+    token_ttl:        604800000
+
+
+

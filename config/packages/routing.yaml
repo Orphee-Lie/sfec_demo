@@ -1,0 +1,31 @@
+framework:
+    router:
+        utf8: true
+
+        # Configure how to generate URLs in non-HTTP contexts, such as CLI commands.
+        # See https://symfony.com/doc/current/routing.html#generating-urls-in-commands
+        #default_uri: http://localhost
+
+when@prod:
+    framework:
+        router:
+            strict_requirements: null
+
+# app/config/routing.yaml
+# app.swagger_ui:
+#     path: /api/doc/{area}
+#     methods: GET
+#     defaults: { _controller: nelmio_api_doc.controller.swagger_ui, area: default }
+
+# With Redocly UI
+# app/config/routing.yaml
+# app.redocly:
+#     path: /api/doc/{area}
+#     methods: GET
+#     defaults: { _controller: nelmio_api_doc.controller.redocly, area: default }
+
+# # To expose them as JSON
+# app.swagger.areas:
+#     path: /api/doc/{area}.json
+#     methods: GET
+#     defaults: { _controller: nelmio_api_doc.controller.swagger }

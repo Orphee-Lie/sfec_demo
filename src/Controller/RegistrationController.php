@@ -5,6 +5,7 @@ namespace App\Controller;
 // ...
 use App\Entity\Site;
 use App\Entity\User;
+use App\Entity\Company;
 use App\Service\IsAdmin;
 use App\Entity\Partenaires;
 use App\Entity\Prestations;
@@ -128,6 +129,7 @@ class RegistrationController extends AbstractController
             $user->setNom($data['nom']);
             $user->setTelephone($data['telephone']);
             $user->setFonction($data['fonction']);
+            
             if (isset($data['partenairesId'])) {
                 # code...
                 $partenaire = $this->entityManager->getRepository(Partenaires::class)->find($data['partenairesId']);
@@ -138,6 +140,12 @@ class RegistrationController extends AbstractController
                 # code...
                 $site = $this->entityManager->getRepository(Site::class)->find($data['id_site']);
                 $user->setIdSite($site);
+            }
+
+            if (isset($data['companyId'])) {
+                # code...
+                $company = $this->entityManager->getRepository(Company::class)->find($data['companyId']);
+                $user->setCompany($company);
             }
             
             $user->setCreatedAtValue();

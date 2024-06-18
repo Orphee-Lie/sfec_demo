@@ -46,6 +46,9 @@ class Prestations
     #[ORM\OneToMany(targetEntity: Caisse::class, mappedBy: 'prestations')]
     private Collection $caisses;
 
+    #[ORM\ManyToOne(inversedBy: 'prestations')]
+    private ?Company $company = null;
+
     // #[ORM\ManyToOne(inversedBy: 'prestationsId')]
     // #[Groups([ "prestations"])]
     // private ?Caisse $caisse = null;
@@ -190,6 +193,18 @@ class Prestations
                 $caiss->setPrestations(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): static
+    {
+        $this->company = $company;
 
         return $this;
     }

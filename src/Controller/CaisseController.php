@@ -162,6 +162,7 @@ class CaisseController extends AbstractController {
             $caisse->setUuid($uuidGenerator->generate());
             $caisse->setCreatedAt(new \DateTime());
             $caisse->setUpdatedAt(new \DateTime());
+            $caisse->setQuantity($data['quantity']);
             //$caisse->setCout
             //creation d'une operation de caisse suite à une intervention dans la caisse 
             $operationCaisse = new OperationCaisse();

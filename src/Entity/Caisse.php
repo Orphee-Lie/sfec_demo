@@ -74,6 +74,10 @@ class Caisse
     #[ORM\Column(unique: false, nullable: false, options: ['default' => '0'])]
     #[Groups(["caisses","operationCaisses"])]
     private ?string $status = '0';
+
+    #[ORM\Column]
+    #[Groups(["caisses", "operationCaisses"])]
+    private ?int $quantity = null;
     public function __construct()
     {
         $this->operationCaisses = new ArrayCollection();
@@ -241,6 +245,18 @@ class Caisse
     public function setNumeroRecuCaisse(?String $numero_recu_caisse): static
     {
         $this->numero_recu_caisse = $numero_recu_caisse;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }
